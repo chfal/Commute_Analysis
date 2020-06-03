@@ -1,0 +1,42 @@
+---
+title: "rejected from final project script"
+author: "chfal"
+date: "5/8/2020"
+output: html_document
+---
+
+### The Distribution for the Green Line
+```{r, include=FALSE}
+green_line <- as.vector(commute_2$green_line)
+enorm(green_line)
+egamma(green_line)
+epareto(green_line)
+```
+```{r, echo=FALSE}
+hist(green_line, freq=FALSE, breaks="FD", ylim=c(0, .20))
+curve(dnorm(x, mean=22.2545,sd=4.082714), from=5, to=35, add=T, col="red",lwd=2)
+curve(dgamma(x, shape=22.7647113, scale=.9975896), from=5, to=35, add=T, col="blue",lwd=2)
+curve(dpareto(x,location=16,shape=2.995331), from=5, to=35, add=T, col="purple",lwd=2)
+legend(x="topright",legend=c("gamma","normal", "pareto"), lty=1, col=c("blue", "red","purple"))
+
+```
+Again, three different distributions were chosen to plot: the normal distribution and the gamma distribution. Upon visual inspection, 
+
+
+### The Distribution for the Red Line
+```{r, include=FALSE}
+red_line <- as.vector(commute_2$red_line)
+enorm(red_line)
+```
+```{r, echo=FALSE}
+hist(red_line, freq=FALSE, breaks="FD", ylim=c(0,.40))
+curve(dnorm(x,mean=11.62903, sd=2.76878), from=0,to=25,add=T, col="red", lwd=2)
+```
+
+## Question 3: Which population has more variance, 
+
+```{r}
+#normalized results
+commute_n<- commute_2 %>%
+  mutate(normalized_total_time = (total_time - 55.9)/6.90621)
+```
